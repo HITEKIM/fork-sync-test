@@ -1,0 +1,26 @@
+name: Sync Fork
+
+on:
+  push:
+    branches:
+      - main # main 브랜치에서 push 이벤트가 발생할 때 트리거됩니다. 필요에 따라 변경하세요.
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+        with:
+          repository: owner/A # A 레포지토리의 owner와 이름으로 변경
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push changes to fork
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote add fork https://$GH_PAT@github.com/HEE-TAE/fork-sync-test_.git # B 레포지토리의 username과 이름으로 변경
+          git push fork main --force

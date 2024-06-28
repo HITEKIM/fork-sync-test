@@ -13,7 +13,7 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v2
         with:
-          repository: HEE-TAE/fork-sync-test # A 레포지토리의 owner와 이름으로 변경
+          repository: HITEKIM/fork-sync-test # A 레포지토리의 owner와 이름으로 변경
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes to fork

@@ -20,7 +20,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote add fork https://$GH_PAT@github.com/HEE-TAE/fork-sync-test_.git # B 레포지토리의 username과 이름으로 변경
-          git push fork main --force
+          git remote add fork https://github.com/HEE-TAE/fork-sync-test_.git # B 레포지토리의 URL을 username/B-Repo.git으로 변경
+          git fetch fork
+          git checkout -b sync-branch fork/main
+          git push origin sync-branch:main
